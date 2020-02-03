@@ -142,7 +142,7 @@ public class PatientService {
 	 * @throws NoSuchMessageException
 	 */
 	@Transactional(rollbackFor = { UserUpdationFailed.class, PatientUpdationFailed.class })
-	public Patient updatePatient(Patient patient) throws NoSuchMessageException, BusinessException {
+	public Patient updatePatient(Patient patient) throws SystemException, BusinessException {
 		try {
 			LOGGER.traceEntry();
 			int rowsAffectedInUser = 0;
@@ -189,7 +189,7 @@ public class PatientService {
 	 * @param patientId the patient id
 	 * @return true, if successful
 	 */
-	public boolean deletePatient(int patientId) {
+	public boolean deletePatient(int patientId) throws SystemException {
 		try {
 			LOGGER.traceEntry();
 			boolean result = false;

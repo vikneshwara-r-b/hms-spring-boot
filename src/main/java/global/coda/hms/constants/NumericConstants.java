@@ -15,6 +15,9 @@ public final class NumericConstants {
 		// Numeric Constants
 	}
 
+	/** THE Constant ZERO. */
+	public static final int ZERO = 0;
+
 	/** The Constant ONE. */
 	public static final int ONE = 1;
 

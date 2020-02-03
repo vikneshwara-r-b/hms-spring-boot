@@ -13,6 +13,11 @@ public final class QueryConstants {
 		// Query Constants
 	}
 
+	/** The Constant PATIENT_ROLE_ID. */
+	public static final int PATIENT_ROLE_ID = 2;
+
+	/** The Constant DOCTOR_ROLE_ID. */
+	public static final int DOCTOR_ROLE_ID = 3;
 	/** The Constant DOCTOR_INSERT. */
 	// Doctor Queries
 	public static final String DOCTOR_INSERT = "INSERT INTO " + "t_doctor_details "
