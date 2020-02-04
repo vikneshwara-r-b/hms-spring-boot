@@ -5,8 +5,17 @@ package global.coda.hms.constants;
 
 import global.coda.hms.models.Patient;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PatientConstants.
+ */
 public class PatientConstants {
 
+	/**
+	 * Creates the valid mock patient.
+	 *
+	 * @return the patient
+	 */
 	public Patient createValidMockPatient() {
 		Patient validMockPatient = new Patient();
 		validMockPatient.setUserUsername(PatientTestConstants.VALID_USERNAME);
@@ -25,6 +34,11 @@ public class PatientConstants {
 		return validMockPatient;
 	}
 
+	/**
+	 * Creates the invalid mock patient.
+	 *
+	 * @return the patient
+	 */
 	public Patient createInvalidMockPatient() {
 		Patient invalidMockPatient = new Patient();
 		invalidMockPatient.setUserUsername(PatientTestConstants.VALID_USERNAME);
