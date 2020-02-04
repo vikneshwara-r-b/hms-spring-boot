@@ -4,6 +4,7 @@
 package global.coda.hms.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import global.coda.hms.constants.AppConstants;
 import global.coda.hms.constants.HttpStatusConstants;
 import global.coda.hms.exception.BusinessException;
 import global.coda.hms.exception.SystemException;
@@ -37,10 +40,9 @@ import global.coda.hms.service.PatientService;
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
+	@Autowired
+	private MessageSource messageSource;
 
-	/*
-	 * @Autowired CustomerRepository repository;
-	 */
 	/** The logger. */
 	private final Logger LOGGER = LogManager.getLogger(PatientController.class);
 
@@ -87,7 +89,7 @@ public class PatientController {
 		patients = patientService.getPatientById(patientId);
 		responseBody.setData(patients);
 		responseBody.setStatusCode(HttpStatusConstants.OK);
-		responseBody.setRequestId(response.getHeader("key"));
+		responseBody.setRequestId(response.getHeader(AppConstants.KEY));
 		LOGGER.traceExit();
 		return responseBody;
 	}
@@ -106,8 +108,8 @@ public class PatientController {
 		Patient createdpatient = null;
 		createdpatient = patientService.createPatient(patient);
 		if (createdpatient == null) {
-			LOGGER.info("Patient is not created successfully");
-			responseBody.setData("Patient is not created successfully");
+			LOGGER.info(messageSource.getMessage(AppConstants.HMS1032I, null, Locale.US));
+			responseBody.setData(messageSource.getMessage(AppConstants.HMS1033I, null, Locale.US));
 			responseBody.setStatusCode(HttpStatusConstants.CLIENT_ERROR);
 		} else {
 			responseBody.setStatusCode(HttpStatusConstants.OK);
@@ -126,13 +128,13 @@ public class PatientController {
 	 * @throws NoSuchMessageException
 	 */
 	@PutMapping("/update")
-	public ResponseBody updatePatient(@RequestBody Patient patient) throws NoSuchMessageException, BusinessException {
+	public ResponseBody updatePatient(@RequestBody Patient patient) throws SystemException, BusinessException {
 		LOGGER.traceEntry();
 		Patient updatedpatient = null;
 		updatedpatient = patientService.updatePatient(patient);
 		if (updatedpatient == null) {
-			LOGGER.info("Patient is not updated successfully");
-			responseBody.setData("Patient is not updated successfully");
+			LOGGER.info(messageSource.getMessage(AppConstants.HMS1010I, null, Locale.US));
+			responseBody.setData(messageSource.getMessage(AppConstants.HMS1010I, null, Locale.US));
 			responseBody.setStatusCode(HttpStatusConstants.CLIENT_ERROR);
 		} else {
 			responseBody.setStatusCode(HttpStatusConstants.OK);
@@ -155,19 +157,13 @@ public class PatientController {
 		isDeleted = patientService.deletePatient(patientId);
 		if (isDeleted) {
 			responseBody.setStatusCode(HttpStatusConstants.NO_CONTENT);
-			responseBody.setData("Patient is deleted successfully");
+			responseBody.setData(messageSource.getMessage(AppConstants.HMS1000I, null, Locale.US));
 		} else {
 			responseBody.setStatusCode(HttpStatusConstants.INTERNAL_SERVER_ERROR);
-			responseBody.setData("Patient is not deleted successfully");
+			responseBody.setData(messageSource.getMessage(AppConstants.HMS1001I, null, Locale.US));
 		}
 		LOGGER.traceExit();
 		return responseBody;
 	}
 
-	/*
-	 * @GetMapping("/customer") public ResponseBody customerActions() {
-	 * repository.findAll(); Optional<Customer> customer =
-	 * repository.findById((long) 8); responseBody.setData(customer); return
-	 * responseBody; }
-	 */
 }

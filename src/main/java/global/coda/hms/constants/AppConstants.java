@@ -123,6 +123,8 @@ public final class AppConstants {
 	/** The Constant HMS1032I. */
 	public static final String HMS1032I = "HMS1032I";
 
+	public static final String HMS1033I = "HMS1033I";
+
 	/** The Constant HMS2000D. */
 	// Debug constants
 	public static final String HMS2000D = "HMS2000D";
@@ -224,4 +226,5 @@ public final class AppConstants {
 	/** The Constant HMS3020E. */
 	public static final String HMS3020E = "HMS3020E";
 
+	public static final String KEY = "key";
 }
