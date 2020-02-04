@@ -39,7 +39,7 @@ public final class QueryConstants {
 			+ "doctor.pk_doctor_id,user.user_created_on,user.user_updated_on,doctor.doctor_created_on,doctor.doctor_updated_on "
 			+ "from t_user_details as user INNER JOIN t_doctor_details as doctor"
 			+ " on user.pk_user_id = doctor.fk_user_id where user.user_isactive=" + ACTIVE
-			+ "and doctor.doctor_isactive=" + ACTIVE + "and user.fk_role_id=" + DOCTOR_ROLE_ID;
+			+ " and doctor.doctor_isactive=" + ACTIVE + " and user.fk_role_id=" + DOCTOR_ROLE_ID;
 
 	/** The Constant DOCTOR_READ. */
 	public static final String DOCTOR_READ = "<script>select user.pk_user_id,user.user_username,"
@@ -49,14 +49,15 @@ public final class QueryConstants {
 			+ "doctor.doctor_speciality,user.user_isactive,doctor.doctor_isactive,"
 			+ "doctor.pk_doctor_id,user.user_created_on,user.user_updated_on,doctor.doctor_created_on,doctor.doctor_updated_on from"
 			+ " t_user_details as user INNER JOIN t_doctor_details as doctor on user.pk_user_id = doctor.fk_user_id"
-			+ " where user.user_isactive=" + ACTIVE + "and doctor.doctor_isactive=" + ACTIVE + "and user.fk_role_id="
+			+ " where user.user_isactive=" + ACTIVE + " and doctor.doctor_isactive=" + ACTIVE + " and user.fk_role_id="
 			+ DOCTOR_ROLE_ID + " and <if test='doctorId!=0'>doctor.pk_doctor_id=#{doctorId}</if></script>";
 
 	/** The Constant DOCTOR_DELETE. */
 	public static final String DOCTOR_DELETE = "update t_user_details as user,t_doctor_details as doctor "
 			+ "set user.user_isactive=" + NOT_ACTIVE + ",doctor.doctor_isactive=" + NOT_ACTIVE
-			+ "where doctor.pk_doctor_id=#{doctorId} and " + "user.pk_user_id=doctor.fk_user_id and user.user_isactive="
-			+ ACTIVE + "and doctor.doctor_isactive=" + ACTIVE + " and user.fk_role_id =" + DOCTOR_ROLE_ID;
+			+ " where doctor.pk_doctor_id=#{doctorId} and "
+			+ "user.pk_user_id=doctor.fk_user_id and user.user_isactive=" + ACTIVE + " and doctor.doctor_isactive="
+			+ ACTIVE + " and user.fk_role_id =" + DOCTOR_ROLE_ID;
 
 	/** The Constant DOCTOR_UPDATE. */
 	public static final String DOCTOR_UPDATE = "update t_doctor_details set doctor_experience=#{doctorExperience},"

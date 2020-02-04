@@ -70,7 +70,7 @@ public class DoctorController {
 	 * @return the doctor by id
 	 */
 	@GetMapping("getDoctors/{id}")
-	public ResponseBody getDoctorById(@RequestParam("id") Integer doctorId) {
+	public ResponseBody getDoctorById(@PathVariable("id") Integer doctorId) {
 		LOGGER.traceEntry();
 		if (doctorId == null) {
 			doctorId = 0;
