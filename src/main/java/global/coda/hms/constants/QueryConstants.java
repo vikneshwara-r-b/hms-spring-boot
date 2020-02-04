@@ -13,6 +13,12 @@ public final class QueryConstants {
 		// Query Constants
 	}
 
+	/** The Constant IS_ACTIVE. */
+	public static final int ACTIVE = 1;
+
+	/** The Constant NOT_ACTIVE. */
+	public static final int NOT_ACTIVE = 0;
+
 	/** The Constant PATIENT_ROLE_ID. */
 	public static final int PATIENT_ROLE_ID = 2;
 
@@ -32,8 +38,8 @@ public final class QueryConstants {
 			+ "user.user_isactive,doctor.doctor_isactive,doctor.fk_user_id,"
 			+ "doctor.pk_doctor_id,user.user_created_on,user.user_updated_on,doctor.doctor_created_on,doctor.doctor_updated_on "
 			+ "from t_user_details as user INNER JOIN t_doctor_details as doctor"
-			+ " on user.pk_user_id = doctor.fk_user_id where user.user_isactive=1 "
-			+ "and doctor.doctor_isactive=1 and user.fk_role_id=3";
+			+ " on user.pk_user_id = doctor.fk_user_id where user.user_isactive=" + ACTIVE
+			+ "and doctor.doctor_isactive=" + ACTIVE + "and user.fk_role_id=" + DOCTOR_ROLE_ID;
 
 	/** The Constant DOCTOR_READ. */
 	public static final String DOCTOR_READ = "<script>select user.pk_user_id,user.user_username,"
@@ -43,14 +49,14 @@ public final class QueryConstants {
 			+ "doctor.doctor_speciality,user.user_isactive,doctor.doctor_isactive,"
 			+ "doctor.pk_doctor_id,user.user_created_on,user.user_updated_on,doctor.doctor_created_on,doctor.doctor_updated_on from"
 			+ " t_user_details as user INNER JOIN t_doctor_details as doctor on user.pk_user_id = doctor.fk_user_id"
-			+ " where user.user_isactive=1 and doctor.doctor_isactive=1 and user.fk_role_id=3"
-			+ " and <if test='doctorId!=0'>doctor.pk_doctor_id=#{doctorId}</if></script>";
+			+ " where user.user_isactive=" + ACTIVE + "and doctor.doctor_isactive=" + ACTIVE + "and user.fk_role_id="
+			+ DOCTOR_ROLE_ID + " and <if test='doctorId!=0'>doctor.pk_doctor_id=#{doctorId}</if></script>";
 
 	/** The Constant DOCTOR_DELETE. */
 	public static final String DOCTOR_DELETE = "update t_user_details as user,t_doctor_details as doctor "
-			+ "set user.user_isactive=0,doctor.doctor_isactive=0 where doctor.pk_doctor_id=#{doctorId} and "
-			+ "user.pk_user_id=doctor.fk_user_id and user.user_isactive=1 and doctor.doctor_isactive=1"
-			+ " and user.fk_role_id =3";
+			+ "set user.user_isactive=" + NOT_ACTIVE + ",doctor.doctor_isactive=" + NOT_ACTIVE
+			+ "where doctor.pk_doctor_id=#{doctorId} and " + "user.pk_user_id=doctor.fk_user_id and user.user_isactive="
+			+ ACTIVE + "and doctor.doctor_isactive=" + ACTIVE + " and user.fk_role_id =" + DOCTOR_ROLE_ID;
 
 	/** The Constant DOCTOR_UPDATE. */
 	public static final String DOCTOR_UPDATE = "update t_doctor_details set doctor_experience=#{doctorExperience},"
@@ -96,7 +102,7 @@ public final class QueryConstants {
 	/** The Constant PATIENT_UPDATE. */
 	public static final String PATIENT_UPDATE = "update t_patient_details set "
 			+ " patient_height=#{patientHeight},patient_blood_group=#{patientBloodGroup},patient_weight=#{patientWeight} "
-			+ "where pk_patient_id=#{pkPatientId} and patient_isactive=1";
+			+ "where pk_patient_id=#{pkPatientId} and patient_isactive=" + ACTIVE;
 
 	/** The Constant USER_SELECT_WITH_ID. */
 	// User Queries
